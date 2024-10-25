@@ -80,7 +80,7 @@ class MainWindow(QMainWindow):
 
 
 
-
+#initializes web browser
 app = QApplication(sys.argv)
 QApplication.setApplicationName("Browser")
 window = MainWindow()
