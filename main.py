@@ -8,6 +8,7 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         # Main Websitelook
+        #all have to be initialized below
         self.profile = QWebEngineProfile.defaultProfile()
         super(MainWindow, self).__init__()
         self.browser = QWebEngineView()
@@ -15,9 +16,10 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.browser)
         self.showMaximized()
         profile = QWebEngineProfile.defaultProfile()
+        #clears Cache
         profile.clearHttpCache()  # Clear the HTTP cache
         self.clear_profile_data(clear_cookies=True, clear_cache=False)
-        QMessageBox.information(self, "Fresh Slate", "Cookies and Chache have been cleared")
+        QMessageBox.information(self, "Fresh Slate", "Cookies and Cache have been cleared")
 
 
 
@@ -49,17 +51,21 @@ class MainWindow(QMainWindow):
 
         self.browser.urlChanged.connect(self.update_url)
 
+
+#updates url text to the url
     def update_url(self, url):
         self.url_bar.setText(url.toString())
 
+#navigates to the set homepage in the method
     def navigate_home(self):
         self.browser.setUrl(QUrl("https://google.com"))
 
+#navigate to set url
     def navigate_to_url(self):
         url = self.url_bar.text()
         self.browser.setUrl(QUrl(url))
 
-
+#clears cookies
     def clear_profile_data(self, clear_cookies=True, clear_cache=True):
         profile = QWebEngineProfile.defaultProfile()
 
